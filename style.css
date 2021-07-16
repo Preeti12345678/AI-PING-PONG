@@ -17,12 +17,29 @@ body{
 .start{
     background-color: yellow;
     font-size: 30px;
-    color:grey;
+    color:rgb(48, 47, 47);
     border-radius: 20px;
 }
-.status{
-    background-color: grey;
+.restart{
+    background-color: rgb(48, 47, 47);
     color: yellow;
-    font-size: 25px;
+    font-size: 30px;
     border-radius: 20px;
+}
+
+.status{
+   background-color: black;
+   color: white;
+   font-size: 25px;
+   border-radius: 20px;
+}
+.footer{
+    width: 100%;
+    background-color: yellow;
+    color: rgb(48, 47, 47);
+    padding: 5px;
+    font-size: 20px;
+    position: fixed;
+    bottom: 0;
+
 }
