@@ -1,6 +1,9 @@
 
 /*created by prashant shukla */
-
+var rightWristX="";
+var rightWristY="";
+var rightWristScore="";
+game_status="";
 var paddle2 =10,paddle1=10;
 
 var paddle1X = 10,paddle1Height = 110;
@@ -20,7 +23,10 @@ var ball = {
     dx:3,
     dy:3
 }
-
+function startGame(){
+  game_status="start";
+  document.getElementById("status").innerHTML="Game is Loaded";
+}
 function setup(){
   var canvas =  createCanvas(700,600);
   canvas.parent("canvas");
@@ -28,12 +34,21 @@ function setup(){
   video.size(700,600);
   video.hide();
   posenet=ml5.poseNet(video,modelLoaded);
+  posenet.on('pose',gotPoses);
 }
 function modelLoaded(){
   console.log("Model Loaded");
 }
-
+function gotPoses(results){
+  if(results.length>0){
+    rightWristX=results[0].pose.rightWrist.x;
+    rightWristY=results[0].pose.rightWrist.y;
+    rightWristScore=results[0].pose.rightWrist.score;
+    console.log(results);
+  }
+}
 function draw(){
+  if(game_status=="start"){
 image(video,0,0,700,600);
  background(0); 
 
@@ -44,7 +59,12 @@ image(video,0,0,700,600);
  fill("black");
  stroke("black");
  rect(0,0,20,700);
- 
+ if(rightWristScore>0.2){
+   fill("red");
+   stroke("red");
+   circle(rightWristX,rightWristY,20);
+
+ }
    //funtion paddleInCanvas call 
    paddleInCanvas();
  
@@ -72,6 +92,7 @@ image(video,0,0,700,600);
    
    //function move call which in very important
     move();
+}
 }
 
 
