@@ -25,7 +25,7 @@ var ball = {
 }
 function startGame(){
   game_status="start";
-  document.getElementById("status").innerHTML="Game is Loaded";
+  document.getElementById("status").innerHTML="Game is Loading";
 }
 function preload(){
  ball_touch=loadSound("ball_touch_paddel.wav");
@@ -47,14 +47,13 @@ function gotPoses(results){
   if(results.length>0){
     rightWristX=results[0].pose.rightWrist.x;
     rightWristY=results[0].pose.rightWrist.y;
-    rightWristScore=results[0].pose.rightWrist.score;
+    rightWristScore=results[0].pose.keypoints[10].score;
     console.log(results);
   }
 }
 function draw(){
-  if(game_status=="start"){
+    background(0); 
 image(video,0,0,700,600);
- background(0); 
 
  fill("black");
  stroke("black");
@@ -69,6 +68,8 @@ image(video,0,0,700,600);
    circle(rightWristX,rightWristY,20);
 
  }
+ if(game_status=="start"){
+  document.getElementById("status").innerHTML="Game is Loaded";
    //funtion paddleInCanvas call 
    paddleInCanvas();
  
